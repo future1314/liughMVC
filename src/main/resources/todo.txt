@@ -1,0 +1,7 @@
+web.xml 怎么去掉 ？
+怎么把tomcat 集成进去。
+MyRequestParam怎么解析的？
+required=true 这种怎么处理。
+怎么给客户端返回jsonString
+
+http://localhost:8080/test/doTest?param=abc

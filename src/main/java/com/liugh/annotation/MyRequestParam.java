@@ -6,10 +6,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.PARAMETER)
+@Target(ElementType.PARAMETER)//作用范围
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MyRequestParam {
+public @interface MyRequestParam {///程序里未进行处理？
 	/**
      * 表示参数的别名，必填
      * @return

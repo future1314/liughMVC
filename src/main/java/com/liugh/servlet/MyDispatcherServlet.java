@@ -155,13 +155,13 @@ public class MyDispatcherServlet extends HttpServlet{
 	private void doScanner(String packageName) {
 		//把所有的.替换成/
 		URL url  =this.getClass().getClassLoader().getResource("/"+packageName.replaceAll("\\.", "/"));
-		File dir = new File(url.getFile());
+		File dir = new File(url.getFile());//
 		for (File file : dir.listFiles()) {
 			if(file.isDirectory()){
 				//递归读取包
 				doScanner(packageName+"."+file.getName());
 			}else{
-				String className =packageName +"." +file.getName().replace(".class", "");
+				String className =packageName +"." +file.getName().replace(".class", "");//
 				classNames.add(className);
 			}
 		}
@@ -177,7 +177,7 @@ public class MyDispatcherServlet extends HttpServlet{
 			try {
 				//把类搞出来,反射来实例化(只有加@MyController需要实例化)
 				Class<?> clazz =Class.forName(className);
-			   if(clazz.isAnnotationPresent(MyController.class)){
+			   if(clazz.isAnnotationPresent(MyController.class)){//
 					ioc.put(toLowerFirstWord(clazz.getSimpleName()),clazz.newInstance());
 				}else{
 					continue;
@@ -186,7 +186,7 @@ public class MyDispatcherServlet extends HttpServlet{
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				continue;
+				continue;//出了异常应该重新启动吧
 			}
 		}
 	}
@@ -217,11 +217,11 @@ public class MyDispatcherServlet extends HttpServlet{
 					MyRequestMapping annotation = method.getAnnotation(MyRequestMapping.class);
 					String url = annotation.value();
 					
-					url =(baseUrl+"/"+url).replaceAll("/+", "/");
+					url =(baseUrl+"/"+url).replaceAll("/+", "/");//
 					//这里应该放置实例和method 
-					handlerMapping.put(url,method);
-					controllerMap.put(url,clazz.newInstance());
-					System.out.println(url+","+method);
+					handlerMapping.put(url,method);//url 和 方法的 映射关系
+					controllerMap.put(url,clazz.newInstance());//URL 和类的映射关系
+					System.out.println(url+"....."+method);
 				}
 				
 			}
